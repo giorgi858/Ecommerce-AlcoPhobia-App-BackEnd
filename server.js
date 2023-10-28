@@ -17,11 +17,12 @@ const credentials = require('./middleware/credentials')
 conndb();
 //middleware
 app.use(logger);
+app.use(credentials)
+app.use(cors(corsOptions))
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser())
-app.use(cors({
-    origin:  'https://m.youtube.com'
-}))
+
 app.use(express.static('public'));
 
 //routes 
@@ -30,8 +31,11 @@ app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/logout', require('./routes/logout'));
+
 app.use(verifyJWY)
 app.use('/employee', require('./routes/API/employee'));
+app.use('/user', require('./routes/API/user'));
+
 
 app.all('*', (req, res) => {
     res.status(404);

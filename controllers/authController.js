@@ -24,7 +24,7 @@ const handleLogin = async (req, res) => {
                 'user': foundUser.user,
             },
             process.env.REF_T,
-            { expiresIn: '100m'}
+            { expiresIn: '1d'}
         );
         foundUser.refreshToken = refreshToken;
         const result = await foundUser.save();

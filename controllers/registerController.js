@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const handleNewUser = async (req,res) => {
    const { user, pwd } = req.body;
    if (!user || !pwd) return res.status(400).json({'message': 'user and password are required!'})
-   const duplicate = await User.findOne({ username: user }).exec();
+   const duplicate = await User.findOne({ user: user }).exec();
    if (duplicate) return res.sendStatus(409);
    try {
       const hashedPwd = await bcrypt.hash(pwd, 10);

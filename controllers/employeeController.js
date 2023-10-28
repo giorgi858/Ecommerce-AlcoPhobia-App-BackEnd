@@ -4,6 +4,7 @@ const getAllEmployee = async (req,res) => {
     const employees = await Employee.find();
     if (!employees) return res.sendStatus(204);
     res.send(employees)
+    console.log(employees);
 };
 const createEmployee = async (req,res) => {
     if (!req.body.firstname || !req.body.lastname ){
